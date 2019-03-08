@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-
-import Map from 'esri/map';
+import { JsapiServiceService } from 'src/services/jsapi-service.service';
 
 @Component({
   selector: 'app-m4sp-map',
@@ -9,13 +8,13 @@ import Map from 'esri/map';
 })
 export class M4spMapComponent implements OnInit {
 
-  constructor() { }
+  constructor( private jsapiService: JsapiServiceService) { }
   @ViewChild('mapRoot') mapRoot: ElementRef;
   ngOnInit() {
-    const map = new Map(this.mapRoot.nativeElement, {
+    this.jsapiService.createMap(this.mapRoot.nativeElement, {
       center: [-118, 34.5],
       zoom: 8,
       basemap: 'topo'
-    });
+    })
   }
 }
